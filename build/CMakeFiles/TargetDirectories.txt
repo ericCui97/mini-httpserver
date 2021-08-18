@@ -1,0 +1,4 @@
+/home/cui/unix_env_programming/http_parser/build/CMakeFiles/rebuild_cache.dir
+/home/cui/unix_env_programming/http_parser/build/CMakeFiles/edit_cache.dir
+/home/cui/unix_env_programming/http_parser/build/CMakeFiles/httpd.dir
+/home/cui/unix_env_programming/http_parser/build/CMakeFiles/epollserver.dir

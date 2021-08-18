@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/cui/unix_env_programming/http_parser/http-test.cpp
+http.h
+/home/cui/unix_env_programming/http_parser/http.h
+iostream
+-
+
+/home/cui/unix_env_programming/http_parser/http.cpp
+http.h
+/home/cui/unix_env_programming/http_parser/http.h
+string.h
+-
+vector
+-
+
+/home/cui/unix_env_programming/http_parser/http.h
+map
+-
+string
+-
+

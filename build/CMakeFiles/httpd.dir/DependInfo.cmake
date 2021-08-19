@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/cui/unix_env_programming/http_parser/http-test.cpp" "/home/cui/unix_env_programming/http_parser/build/CMakeFiles/httpd.dir/http-test.cpp.o"
-  "/home/cui/unix_env_programming/http_parser/http.cpp" "/home/cui/unix_env_programming/http_parser/build/CMakeFiles/httpd.dir/http.cpp.o"
+  "/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.cpp" "/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles/httpd.dir/http.cpp.o"
+  "/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/test/http-test.cpp" "/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles/httpd.dir/test/http-test.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -315,4 +315,3 @@ const std::map<std::string, std::string> &HttpRequest::getHeaders() const {
 const std::string &HttpRequest::getBody() const {
     return _body;
 }
-

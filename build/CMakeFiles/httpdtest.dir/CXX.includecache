@@ -27,9 +27,9 @@ set_socket.h
 /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/set_socket.h
 
 /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.h
-map
--
 string
+-
+map
 -
 
 /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/logger.h

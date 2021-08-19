@@ -1,4 +1,3 @@
-/home/cui/unix_env_programming/http_parser/build/CMakeFiles/rebuild_cache.dir
-/home/cui/unix_env_programming/http_parser/build/CMakeFiles/edit_cache.dir
-/home/cui/unix_env_programming/http_parser/build/CMakeFiles/httpd.dir
-/home/cui/unix_env_programming/http_parser/build/CMakeFiles/epollserver.dir
+/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles/rebuild_cache.dir
+/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles/httpdtest.dir
+/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles/edit_cache.dir

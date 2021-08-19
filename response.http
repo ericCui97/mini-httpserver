@@ -1,0 +1,60 @@
+HTTP/2 200 
+server: GitHub.com
+date: Wed, 18 Aug 2021 06:34:24 GMT
+content-type: application/json; charset=utf-8
+cache-control: public, max-age=60, s-maxage=60
+vary: Accept, Accept-Encoding, Accept, X-Requested-With
+etag: W/"cde5a8375ff45920d04328a3bd8bae1ecb2dc02f0ba5ae8cb7960ce5bd04859c"
+last-modified: Thu, 29 Jul 2021 11:10:23 GMT
+x-github-media-type: github.v3; format=json
+access-control-expose-headers: ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, Deprecation, Sunset
+access-control-allow-origin: *
+strict-transport-security: max-age=31536000; includeSubdomains; preload
+x-frame-options: deny
+x-content-type-options: nosniff
+x-xss-protection: 0
+referrer-policy: origin-when-cross-origin, strict-origin-when-cross-origin
+content-security-policy: default-src 'none'
+x-ratelimit-limit: 60
+x-ratelimit-remaining: 52
+x-ratelimit-reset: 1629271004
+x-ratelimit-resource: core
+x-ratelimit-used: 8
+accept-ranges: bytes
+content-length: 1305
+x-github-request-id: F18E:6FEF:838BB:16CFB4:611CA9F0
+
+{
+  "login": "defunkt",
+  "id": 2,
+  "node_id": "MDQ6VXNlcjI=",
+  "avatar_url": "https://avatars.githubusercontent.com/u/2?v=4",
+  "gravatar_id": "",
+  "url": "https://api.github.com/users/defunkt",
+  "html_url": "https://github.com/defunkt",
+  "followers_url": "https://api.github.com/users/defunkt/followers",
+  "following_url": "https://api.github.com/users/defunkt/following{/other_user}",
+  "gists_url": "https://api.github.com/users/defunkt/gists{/gist_id}",
+  "starred_url": "https://api.github.com/users/defunkt/starred{/owner}{/repo}",
+  "subscriptions_url": "https://api.github.com/users/defunkt/subscriptions",
+  "organizations_url": "https://api.github.com/users/defunkt/orgs",
+  "repos_url": "https://api.github.com/users/defunkt/repos",
+  "events_url": "https://api.github.com/users/defunkt/events{/privacy}",
+  "received_events_url": "https://api.github.com/users/defunkt/received_events",
+  "type": "User",
+  "site_admin": false,
+  "name": "Chris Wanstrath",
+  "company": null,
+  "blog": "http://chriswanstrath.com/",
+  "location": null,
+  "email": null,
+  "hireable": null,
+  "bio": "🍔",
+  "twitter_username": null,
+  "public_repos": 107,
+  "public_gists": 273,
+  "followers": 21259,
+  "following": 210,
+  "created_at": "2007-10-20T05:24:19Z",
+  "updated_at": "2021-07-29T11:10:23Z"
+}

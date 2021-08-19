@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cui/unix_env_programming/http_parser
+CMAKE_SOURCE_DIR = /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cui/unix_env_programming/http_parser/build
+CMAKE_BINARY_DIR = /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/httpd.dir/depend.make
@@ -57,42 +57,42 @@ include CMakeFiles/httpd.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/httpd.dir/flags.make
 
-CMakeFiles/httpd.dir/http-test.cpp.o: CMakeFiles/httpd.dir/flags.make
-CMakeFiles/httpd.dir/http-test.cpp.o: ../http-test.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cui/unix_env_programming/http_parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/httpd.dir/http-test.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/httpd.dir/http-test.cpp.o -c /home/cui/unix_env_programming/http_parser/http-test.cpp
+CMakeFiles/httpd.dir/test/http-test.cpp.o: CMakeFiles/httpd.dir/flags.make
+CMakeFiles/httpd.dir/test/http-test.cpp.o: ../test/http-test.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/httpd.dir/test/http-test.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/httpd.dir/test/http-test.cpp.o -c /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/test/http-test.cpp
 
-CMakeFiles/httpd.dir/http-test.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/httpd.dir/http-test.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cui/unix_env_programming/http_parser/http-test.cpp > CMakeFiles/httpd.dir/http-test.cpp.i
+CMakeFiles/httpd.dir/test/http-test.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/httpd.dir/test/http-test.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/test/http-test.cpp > CMakeFiles/httpd.dir/test/http-test.cpp.i
 
-CMakeFiles/httpd.dir/http-test.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/httpd.dir/http-test.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cui/unix_env_programming/http_parser/http-test.cpp -o CMakeFiles/httpd.dir/http-test.cpp.s
+CMakeFiles/httpd.dir/test/http-test.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/httpd.dir/test/http-test.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/test/http-test.cpp -o CMakeFiles/httpd.dir/test/http-test.cpp.s
 
-CMakeFiles/httpd.dir/http-test.cpp.o.requires:
+CMakeFiles/httpd.dir/test/http-test.cpp.o.requires:
 
-.PHONY : CMakeFiles/httpd.dir/http-test.cpp.o.requires
+.PHONY : CMakeFiles/httpd.dir/test/http-test.cpp.o.requires
 
-CMakeFiles/httpd.dir/http-test.cpp.o.provides: CMakeFiles/httpd.dir/http-test.cpp.o.requires
-	$(MAKE) -f CMakeFiles/httpd.dir/build.make CMakeFiles/httpd.dir/http-test.cpp.o.provides.build
-.PHONY : CMakeFiles/httpd.dir/http-test.cpp.o.provides
+CMakeFiles/httpd.dir/test/http-test.cpp.o.provides: CMakeFiles/httpd.dir/test/http-test.cpp.o.requires
+	$(MAKE) -f CMakeFiles/httpd.dir/build.make CMakeFiles/httpd.dir/test/http-test.cpp.o.provides.build
+.PHONY : CMakeFiles/httpd.dir/test/http-test.cpp.o.provides
 
-CMakeFiles/httpd.dir/http-test.cpp.o.provides.build: CMakeFiles/httpd.dir/http-test.cpp.o
+CMakeFiles/httpd.dir/test/http-test.cpp.o.provides.build: CMakeFiles/httpd.dir/test/http-test.cpp.o
 
 
 CMakeFiles/httpd.dir/http.cpp.o: CMakeFiles/httpd.dir/flags.make
 CMakeFiles/httpd.dir/http.cpp.o: ../http.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cui/unix_env_programming/http_parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/httpd.dir/http.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/httpd.dir/http.cpp.o -c /home/cui/unix_env_programming/http_parser/http.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/httpd.dir/http.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/httpd.dir/http.cpp.o -c /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.cpp
 
 CMakeFiles/httpd.dir/http.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/httpd.dir/http.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cui/unix_env_programming/http_parser/http.cpp > CMakeFiles/httpd.dir/http.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.cpp > CMakeFiles/httpd.dir/http.cpp.i
 
 CMakeFiles/httpd.dir/http.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/httpd.dir/http.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cui/unix_env_programming/http_parser/http.cpp -o CMakeFiles/httpd.dir/http.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.cpp -o CMakeFiles/httpd.dir/http.cpp.s
 
 CMakeFiles/httpd.dir/http.cpp.o.requires:
 
@@ -107,17 +107,17 @@ CMakeFiles/httpd.dir/http.cpp.o.provides.build: CMakeFiles/httpd.dir/http.cpp.o
 
 # Object files for target httpd
 httpd_OBJECTS = \
-"CMakeFiles/httpd.dir/http-test.cpp.o" \
+"CMakeFiles/httpd.dir/test/http-test.cpp.o" \
 "CMakeFiles/httpd.dir/http.cpp.o"
 
 # External object files for target httpd
 httpd_EXTERNAL_OBJECTS =
 
-httpd: CMakeFiles/httpd.dir/http-test.cpp.o
+httpd: CMakeFiles/httpd.dir/test/http-test.cpp.o
 httpd: CMakeFiles/httpd.dir/http.cpp.o
 httpd: CMakeFiles/httpd.dir/build.make
 httpd: CMakeFiles/httpd.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cui/unix_env_programming/http_parser/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable httpd"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable httpd"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/httpd.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -125,7 +125,7 @@ CMakeFiles/httpd.dir/build: httpd
 
 .PHONY : CMakeFiles/httpd.dir/build
 
-CMakeFiles/httpd.dir/requires: CMakeFiles/httpd.dir/http-test.cpp.o.requires
+CMakeFiles/httpd.dir/requires: CMakeFiles/httpd.dir/test/http-test.cpp.o.requires
 CMakeFiles/httpd.dir/requires: CMakeFiles/httpd.dir/http.cpp.o.requires
 
 .PHONY : CMakeFiles/httpd.dir/requires
@@ -135,6 +135,6 @@ CMakeFiles/httpd.dir/clean:
 .PHONY : CMakeFiles/httpd.dir/clean
 
 CMakeFiles/httpd.dir/depend:
-	cd /home/cui/unix_env_programming/http_parser/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cui/unix_env_programming/http_parser /home/cui/unix_env_programming/http_parser /home/cui/unix_env_programming/http_parser/build /home/cui/unix_env_programming/http_parser/build /home/cui/unix_env_programming/http_parser/build/CMakeFiles/httpd.dir/DependInfo.cmake --color=$(COLOR)
+	cd /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles/httpd.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/httpd.dir/depend
 

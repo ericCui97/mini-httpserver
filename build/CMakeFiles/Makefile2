@@ -54,82 +54,45 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cui/unix_env_programming/http_parser
+CMAKE_SOURCE_DIR = /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cui/unix_env_programming/http_parser/build
+CMAKE_BINARY_DIR = /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/httpd.dir
+# Target rules for target CMakeFiles/httpdtest.dir
 
 # All Build rule for target.
-CMakeFiles/httpd.dir/all:
-	$(MAKE) -f CMakeFiles/httpd.dir/build.make CMakeFiles/httpd.dir/depend
-	$(MAKE) -f CMakeFiles/httpd.dir/build.make CMakeFiles/httpd.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cui/unix_env_programming/http_parser/build/CMakeFiles --progress-num=4,5,6 "Built target httpd"
-.PHONY : CMakeFiles/httpd.dir/all
+CMakeFiles/httpdtest.dir/all:
+	$(MAKE) -f CMakeFiles/httpdtest.dir/build.make CMakeFiles/httpdtest.dir/depend
+	$(MAKE) -f CMakeFiles/httpdtest.dir/build.make CMakeFiles/httpdtest.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles --progress-num=1,2,3 "Built target httpdtest"
+.PHONY : CMakeFiles/httpdtest.dir/all
 
 # Include target in all.
-all: CMakeFiles/httpd.dir/all
+all: CMakeFiles/httpdtest.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/httpd.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cui/unix_env_programming/http_parser/build/CMakeFiles 3
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/httpd.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cui/unix_env_programming/http_parser/build/CMakeFiles 0
-.PHONY : CMakeFiles/httpd.dir/rule
+CMakeFiles/httpdtest.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles 3
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/httpdtest.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles 0
+.PHONY : CMakeFiles/httpdtest.dir/rule
 
 # Convenience name for target.
-httpd: CMakeFiles/httpd.dir/rule
+httpdtest: CMakeFiles/httpdtest.dir/rule
 
-.PHONY : httpd
-
-# clean rule for target.
-CMakeFiles/httpd.dir/clean:
-	$(MAKE) -f CMakeFiles/httpd.dir/build.make CMakeFiles/httpd.dir/clean
-.PHONY : CMakeFiles/httpd.dir/clean
+.PHONY : httpdtest
 
 # clean rule for target.
-clean: CMakeFiles/httpd.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/epollserver.dir
-
-# All Build rule for target.
-CMakeFiles/epollserver.dir/all:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/depend
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cui/unix_env_programming/http_parser/build/CMakeFiles --progress-num=1,2,3 "Built target epollserver"
-.PHONY : CMakeFiles/epollserver.dir/all
-
-# Include target in all.
-all: CMakeFiles/epollserver.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/epollserver.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cui/unix_env_programming/http_parser/build/CMakeFiles 3
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/epollserver.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cui/unix_env_programming/http_parser/build/CMakeFiles 0
-.PHONY : CMakeFiles/epollserver.dir/rule
-
-# Convenience name for target.
-epollserver: CMakeFiles/epollserver.dir/rule
-
-.PHONY : epollserver
+CMakeFiles/httpdtest.dir/clean:
+	$(MAKE) -f CMakeFiles/httpdtest.dir/build.make CMakeFiles/httpdtest.dir/clean
+.PHONY : CMakeFiles/httpdtest.dir/clean
 
 # clean rule for target.
-CMakeFiles/epollserver.dir/clean:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/clean
-.PHONY : CMakeFiles/epollserver.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/epollserver.dir/clean
+clean: CMakeFiles/httpdtest.dir/clean
 
 .PHONY : clean
 

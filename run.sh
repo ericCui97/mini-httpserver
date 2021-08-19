@@ -1,4 +1,5 @@
 cd build
 cmake ..
 make
-./httpd
+
+./epollserver

@@ -3,7 +3,10 @@
 
 CMakeFiles/epollserver.dir/epoll-server.cpp.o: ../epoll-server.cpp
 CMakeFiles/epollserver.dir/epoll-server.cpp.o: ../http.h
+CMakeFiles/epollserver.dir/epoll-server.cpp.o: ../logger.h
 
 CMakeFiles/epollserver.dir/http.cpp.o: ../http.cpp
 CMakeFiles/epollserver.dir/http.cpp.o: ../http.h
+CMakeFiles/epollserver.dir/http.cpp.o: ../logger.h
+CMakeFiles/epollserver.dir/http.cpp.o: ../set_socket.h
 

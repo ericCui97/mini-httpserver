@@ -5,6 +5,7 @@ CMakeFiles/epollserver.dir/epoll-server.cpp.o
  /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/epoll-server.cpp
  /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.h
  /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/logger.h
+ /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/set_socket.h
 CMakeFiles/epollserver.dir/http.cpp.o
  /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.cpp
  /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.h

@@ -9,6 +9,7 @@
 #include <string.h>
 #include <sys/epoll.h>  //epoll头文件
 #include <sys/socket.h>
+#include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <csignal>
@@ -28,8 +29,9 @@ static inline string buildResponse(const string &msg)
 {
     string res(
         "HTTP/1.1 200 OK\r\n"
-        "Content-Type:text/html\r\n"
-        "Connection:Keep-Alive"
+        "Content-Type:application/octet-stream\r\n"
+        "Content-Disposition:attachment; filename=test.txt\r\n"
+        "Connection:cKeep-Alive"
         "\r\n\r\n");
     res += msg;
     return res;
@@ -165,21 +167,52 @@ int main()
                         HttpRequest req;
                         cout << "test" << endl;
                         req.tryDecode(msg);
-                        req.process_header(tmp_epoll_recv_fd);
-                        cout << "methods:" << req.getMethod() << endl;
-                        for (auto &p : req.getRequestParams()) {
-                            cout << p.first << ":" << p.second << endl;
+                        // req.process_header(tmp_epoll_recv_fd);
+
+
+                        struct stat st;
+                        if (stat("./test.txt", &st) == -1) {
                         }
-                        HttpResponse response(req, 0);
-                        string msg("<h1>hello</h1>");
-                        response.setBody(msg);
-                        string message = response.getResponseStr();
-                        if (write(tmp_epoll_recv_fd, message.c_str(),
-                                  message.size()) < 0) {
-                            printf("write Error: %s (errno: %d)\n",
-                                   strerror(errno), errno);
-                        }
-                        // shutdown(tmp_epoll_recv_fd, SHUT_RDWR);
+
+                        size_t size = st.st_size;
+
+                        char header[] =
+                            "HTTP/1.1 200 OK\r\n"
+                            "Content-Type:application/octet-stream\r\n"
+                            "Content-Disposition:attachment; "
+                            "filename=test.txt\r\n"
+                            "Connection:cKeep-Alive"
+                            "\r\n\r\n";
+
+
+
+                        char buf[size];
+
+                        int fd = open("./test.txt", O_RDONLY);
+                        read(fd, buf, size);
+
+                        printf("file size: %zu\n", size);
+                        char data[strlen(header) + size];
+                        memcpy(data, header, strlen(header));
+                        memcpy(data + strlen(header), buf, size);
+
+                        // write(tmp_epoll_recv_fd, data, size +
+                        // strlen(header));
+                        write(tmp_epoll_recv_fd, header, strlen(header));
+                        write(tmp_epoll_recv_fd, buf, size);
+
+                        close(fd);
+
+
+
+                        // string message = buildResponse();
+                        // if (write(tmp_epoll_recv_fd, message.c_str(),
+                        //           message.size()) < 0) {
+                        //     printf("write Error: %s (errno: %d)\n",
+                        //            strerror(errno), errno);
+                        // }
+
+                        shutdown(tmp_epoll_recv_fd, SHUT_RDWR);
                     }
                 }
             }

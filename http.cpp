@@ -342,6 +342,8 @@ int HttpRequest::process_header(int _fd)
 {
     map<string, string>::iterator iter;
     for (iter = _headers.begin(); iter != _headers.end(); ++iter) {
+
+        
         }
     return 0;
 }

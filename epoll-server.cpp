@@ -14,9 +14,9 @@
 #include <unistd.h>
 #include <csignal>
 #include <iostream>
+#include "file_service.h"
 #include "http.h"
 #include "logger.h"
-
 #define MAXSIZE 1024
 #define IP_ADDR "127.0.0.1"
 #define IP_PORT 9999
@@ -170,38 +170,39 @@ int main()
                         // req.process_header(tmp_epoll_recv_fd);
 
 
-                        struct stat st;
-                        if (stat("./test.txt", &st) == -1) {
-                        }
+                        // struct stat st;
+                        // if (stat("./test.txt", &st) == -1) {
+                        // }
 
-                        size_t size = st.st_size;
+                        // size_t size = st.st_size;
 
-                        char header[] =
+                        string header(
                             "HTTP/1.1 200 OK\r\n"
                             "Content-Type:application/octet-stream\r\n"
                             "Content-Disposition:attachment; "
-                            "filename=test.txt\r\n"
-                            "Connection:cKeep-Alive"
-                            "\r\n\r\n";
+                            "filename=test\r\n"
+                            "Connection:Keep-Alive"
+                            "\r\n\r\n");
 
 
 
-                        char buf[size];
+                        // char buf[size];
 
-                        int fd = open("./test.txt", O_RDONLY);
-                        read(fd, buf, size);
+                        // int fd = open("./test.txt", O_RDONLY);
+                        // read(fd, buf, size);
+                        write_static(tmp_epoll_recv_fd, "./test", header);
 
-                        printf("file size: %zu\n", size);
-                        char data[strlen(header) + size];
-                        memcpy(data, header, strlen(header));
-                        memcpy(data + strlen(header), buf, size);
+                        // printf("file size: %zu\n", size);
+                        // char data[strlen(header) + size];
+                        // memcpy(data, header, strlen(header));
+                        // memcpy(data + strlen(header), buf, size);
 
                         // write(tmp_epoll_recv_fd, data, size +
                         // strlen(header));
-                        write(tmp_epoll_recv_fd, header, strlen(header));
-                        write(tmp_epoll_recv_fd, buf, size);
+                        // write(tmp_epoll_recv_fd, header, strlen(header));
+                        // write(tmp_epoll_recv_fd, buf, size);
 
-                        close(fd);
+                        // close(fd);
 
 
 
@@ -212,7 +213,7 @@ int main()
                         //            strerror(errno), errno);
                         // }
 
-                        shutdown(tmp_epoll_recv_fd, SHUT_RDWR);
+                        // shutdown(tmp_epoll_recv_fd, SHUT_RDWR);
                     }
                 }
             }

@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
     HttpResponse res(req, 0);
     string t("cefgnweurigtnlwr4tuhljer5y");
     res.setBody(t);
+
     std::cout << res.getResponseStr() << std::endl;
 
     return 0;

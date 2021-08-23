@@ -1,5 +1,5 @@
-#include "../http.h"
-#include <iostream>
+#include "http.h"
+
 int main(int argc, char *argv[])
 {
     std::string str =
@@ -31,12 +31,10 @@ int main(int argc, char *argv[])
     // 	std::cout << "++ key: " << h.first << std::endl;
     // 	std::cout << "   value: " << h.second << std::endl;
     // }
-    req.process_header(1);
-    HttpResponse res(req, 0);
+    req.process_header();
+    HttpResponse res(req, 0,(char*)"");
     string t("cefgnweurigtnlwr4tuhljer5y");
     res.setBody(t);
-
-    std::cout << res.getResponseStr() << std::endl;
-
+    cout << res.getResponseStr() << endl;
     return 0;
 }

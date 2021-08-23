@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver
+CMAKE_SOURCE_DIR = /home/cui/mini-httpserver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build
+CMAKE_BINARY_DIR = /home/cui/mini-httpserver/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/epollserver.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/epollserver.dir/flags.make
 
 CMakeFiles/epollserver.dir/epoll-server.cpp.o: CMakeFiles/epollserver.dir/flags.make
 CMakeFiles/epollserver.dir/epoll-server.cpp.o: ../epoll-server.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/epollserver.dir/epoll-server.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/epollserver.dir/epoll-server.cpp.o -c /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/epoll-server.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cui/mini-httpserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/epollserver.dir/epoll-server.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/epollserver.dir/epoll-server.cpp.o -c /home/cui/mini-httpserver/epoll-server.cpp
 
 CMakeFiles/epollserver.dir/epoll-server.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/epollserver.dir/epoll-server.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/epoll-server.cpp > CMakeFiles/epollserver.dir/epoll-server.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cui/mini-httpserver/epoll-server.cpp > CMakeFiles/epollserver.dir/epoll-server.cpp.i
 
 CMakeFiles/epollserver.dir/epoll-server.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/epollserver.dir/epoll-server.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/epoll-server.cpp -o CMakeFiles/epollserver.dir/epoll-server.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cui/mini-httpserver/epoll-server.cpp -o CMakeFiles/epollserver.dir/epoll-server.cpp.s
 
 CMakeFiles/epollserver.dir/epoll-server.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/epollserver.dir/epoll-server.cpp.o.provides.build: CMakeFiles/epollse
 
 CMakeFiles/epollserver.dir/http.cpp.o: CMakeFiles/epollserver.dir/flags.make
 CMakeFiles/epollserver.dir/http.cpp.o: ../http.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/epollserver.dir/http.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/epollserver.dir/http.cpp.o -c /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cui/mini-httpserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/epollserver.dir/http.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/epollserver.dir/http.cpp.o -c /home/cui/mini-httpserver/http.cpp
 
 CMakeFiles/epollserver.dir/http.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/epollserver.dir/http.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.cpp > CMakeFiles/epollserver.dir/http.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cui/mini-httpserver/http.cpp > CMakeFiles/epollserver.dir/http.cpp.i
 
 CMakeFiles/epollserver.dir/http.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/epollserver.dir/http.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.cpp -o CMakeFiles/epollserver.dir/http.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cui/mini-httpserver/http.cpp -o CMakeFiles/epollserver.dir/http.cpp.s
 
 CMakeFiles/epollserver.dir/http.cpp.o.requires:
 
@@ -117,7 +117,7 @@ epollserver: CMakeFiles/epollserver.dir/epoll-server.cpp.o
 epollserver: CMakeFiles/epollserver.dir/http.cpp.o
 epollserver: CMakeFiles/epollserver.dir/build.make
 epollserver: CMakeFiles/epollserver.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable epollserver"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cui/mini-httpserver/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable epollserver"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/epollserver.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -135,6 +135,6 @@ CMakeFiles/epollserver.dir/clean:
 .PHONY : CMakeFiles/epollserver.dir/clean
 
 CMakeFiles/epollserver.dir/depend:
-	cd /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles/epollserver.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/cui/mini-httpserver/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cui/mini-httpserver /home/cui/mini-httpserver /home/cui/mini-httpserver/build /home/cui/mini-httpserver/build /home/cui/mini-httpserver/build/CMakeFiles/epollserver.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/epollserver.dir/depend
 

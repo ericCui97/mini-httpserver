@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/epoll-server.cpp
+/home/cui/mini-httpserver/epoll-server.cpp
 arpa/inet.h
 -
 assert.h
@@ -40,13 +40,13 @@ csignal
 iostream
 -
 file_service.h
-/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/file_service.h
+/home/cui/mini-httpserver/file_service.h
 http.h
-/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.h
+/home/cui/mini-httpserver/http.h
 logger.h
-/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/logger.h
+/home/cui/mini-httpserver/logger.h
 
-/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/file_service.h
+/home/cui/mini-httpserver/file_service.h
 assert.h
 -
 errno.h
@@ -68,25 +68,27 @@ unistd.h
 iostream
 -
 logger.h
-/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/logger.h
+/home/cui/mini-httpserver/logger.h
 
-/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.cpp
+/home/cui/mini-httpserver/http.cpp
 http.h
-/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.h
+/home/cui/mini-httpserver/http.h
 string.h
 -
 vector
 -
 
-/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/http.h
+/home/cui/mini-httpserver/http.h
 map
 -
 string
 -
 set_socket.h
-/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/set_socket.h
+/home/cui/mini-httpserver/set_socket.h
+iostream
+-
 
-/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/logger.h
+/home/cui/mini-httpserver/logger.h
 errno.h
 -
 stdio.h
@@ -94,7 +96,7 @@ stdio.h
 string.h
 -
 
-/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/set_socket.h
+/home/cui/mini-httpserver/set_socket.h
 arpa/inet.h
 -
 errno.h
@@ -112,5 +114,5 @@ stdlib.h
 sys/socket.h
 -
 logger.h
-/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/logger.h
+/home/cui/mini-httpserver/logger.h
 

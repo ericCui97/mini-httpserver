@@ -14,8 +14,8 @@
 #include <unistd.h>
 #include <csignal>
 #include <iostream>
-#include "file_service.h"
-#include "http.h"
+#include "file_service/file_service.h"
+#include "http/http.h"
 #include "logger.h"
 #define MAXSIZE 1024
 #define IP_ADDR "127.0.0.1"
@@ -190,10 +190,10 @@ int main()
                             "\r\n\r\n");
                         // write_static_chunked(tmp_epoll_recv_fd, "./test", header, 0, NORMAL_SIZE);
                         //write(tmp_epoll_recv_fd, header.c_str(), header.size());
-                        string res = buildResponse("<h1>hello</h1>");
-                        cout<<res<<endl;
-                        write(tmp_epoll_recv_fd, res.c_str(), res.size());
-                        close(tmp_epoll_recv_fd);
+                        // string res = buildResponse("<h1>hello</h1>");
+                        // cout<<res<<endl;
+                        // write(tmp_epoll_recv_fd, res.c_str(), res.size());
+                        // close(tmp_epoll_recv_fd);
                     }
                 }
             }

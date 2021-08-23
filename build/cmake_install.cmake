@@ -1,4 +1,4 @@
-# Install script for directory: /home/cui/mini-httpserver
+# Install script for directory: /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/cui/mini-httpserver/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -55,7 +55,8 @@ inline static void write_static_chunked(int fd, char *filename, string header, i
     do
     {
         rcnt = read(src_fd, buffer, CHUNK_SIZE);
-        write(fd, buffer, rcnt);
+        int res = write(fd, buffer, rcnt);
+        printf("res = %d\n", res);
     } while (rcnt == CHUNK_SIZE);
 
     close(src_fd);

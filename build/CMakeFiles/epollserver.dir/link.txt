@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/epollserver.dir/epoll-server.cpp.o CMakeFiles/epollserver.dir/http.cpp.o  -o epollserver 

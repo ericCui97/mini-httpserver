@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/cui/mini-httpserver
+CMAKE_SOURCE_DIR = /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/cui/mini-httpserver/build
+CMAKE_BINARY_DIR = /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cui/mini-httpserver/build/CMakeFiles /home/cui/mini-httpserver/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cui/mini-httpserver/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,71 +111,71 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named epollserver
+# Target rules for targets named httpdtest
 
 # Build rule for target.
-epollserver: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 epollserver
-.PHONY : epollserver
+httpdtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 httpdtest
+.PHONY : httpdtest
 
 # fast build rule for target.
-epollserver/fast:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/build
-.PHONY : epollserver/fast
+httpdtest/fast:
+	$(MAKE) -f CMakeFiles/httpdtest.dir/build.make CMakeFiles/httpdtest.dir/build
+.PHONY : httpdtest/fast
 
-epoll-server.o: epoll-server.cpp.o
+http-test.o: http-test.cpp.o
 
-.PHONY : epoll-server.o
-
-# target to build an object file
-epoll-server.cpp.o:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/epoll-server.cpp.o
-.PHONY : epoll-server.cpp.o
-
-epoll-server.i: epoll-server.cpp.i
-
-.PHONY : epoll-server.i
-
-# target to preprocess a source file
-epoll-server.cpp.i:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/epoll-server.cpp.i
-.PHONY : epoll-server.cpp.i
-
-epoll-server.s: epoll-server.cpp.s
-
-.PHONY : epoll-server.s
-
-# target to generate assembly for a file
-epoll-server.cpp.s:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/epoll-server.cpp.s
-.PHONY : epoll-server.cpp.s
-
-http.o: http.cpp.o
-
-.PHONY : http.o
+.PHONY : http-test.o
 
 # target to build an object file
-http.cpp.o:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/http.cpp.o
-.PHONY : http.cpp.o
+http-test.cpp.o:
+	$(MAKE) -f CMakeFiles/httpdtest.dir/build.make CMakeFiles/httpdtest.dir/http-test.cpp.o
+.PHONY : http-test.cpp.o
 
-http.i: http.cpp.i
+http-test.i: http-test.cpp.i
 
-.PHONY : http.i
+.PHONY : http-test.i
 
 # target to preprocess a source file
-http.cpp.i:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/http.cpp.i
-.PHONY : http.cpp.i
+http-test.cpp.i:
+	$(MAKE) -f CMakeFiles/httpdtest.dir/build.make CMakeFiles/httpdtest.dir/http-test.cpp.i
+.PHONY : http-test.cpp.i
 
-http.s: http.cpp.s
+http-test.s: http-test.cpp.s
 
-.PHONY : http.s
+.PHONY : http-test.s
 
 # target to generate assembly for a file
-http.cpp.s:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/http.cpp.s
-.PHONY : http.cpp.s
+http-test.cpp.s:
+	$(MAKE) -f CMakeFiles/httpdtest.dir/build.make CMakeFiles/httpdtest.dir/http-test.cpp.s
+.PHONY : http-test.cpp.s
+
+http/http.o: http/http.cpp.o
+
+.PHONY : http/http.o
+
+# target to build an object file
+http/http.cpp.o:
+	$(MAKE) -f CMakeFiles/httpdtest.dir/build.make CMakeFiles/httpdtest.dir/http/http.cpp.o
+.PHONY : http/http.cpp.o
+
+http/http.i: http/http.cpp.i
+
+.PHONY : http/http.i
+
+# target to preprocess a source file
+http/http.cpp.i:
+	$(MAKE) -f CMakeFiles/httpdtest.dir/build.make CMakeFiles/httpdtest.dir/http/http.cpp.i
+.PHONY : http/http.cpp.i
+
+http/http.s: http/http.cpp.s
+
+.PHONY : http/http.s
+
+# target to generate assembly for a file
+http/http.cpp.s:
+	$(MAKE) -f CMakeFiles/httpdtest.dir/build.make CMakeFiles/httpdtest.dir/http/http.cpp.s
+.PHONY : http/http.cpp.s
 
 # Help Target
 help:
@@ -184,14 +184,14 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... epollserver"
+	@echo "... httpdtest"
 	@echo "... edit_cache"
-	@echo "... epoll-server.o"
-	@echo "... epoll-server.i"
-	@echo "... epoll-server.s"
-	@echo "... http.o"
-	@echo "... http.i"
-	@echo "... http.s"
+	@echo "... http-test.o"
+	@echo "... http-test.i"
+	@echo "... http-test.s"
+	@echo "... http/http.o"
+	@echo "... http/http.i"
+	@echo "... http/http.s"
 .PHONY : help
 
 

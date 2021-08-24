@@ -13,16 +13,45 @@
 #include "logger.h"
 #define NORMAL_SIZE 4096
 using namespace std;
+using std::string;
+
+typedef struct {
+    const char *type;
+    const char *value;
+} mime_type_t;
+
+static mime_type_t mime[] = {{".html", "text/html"},
+                             {".xml", "text/xml"},
+                             {".xhtml", "application/xhtml+xml"},
+                             {".txt", "text/plain"},
+                             {".pdf", "application/pdf"},
+                             {".png", "image/png"},
+                             {".gif", "image/gif"},
+                             {".jpg", "image/jpeg"},
+                             {".css", "text/css"},
+                             {NULL, "text/plain"}};
+
 
 static inline size_t get_file_size(char *filename)
 {
     struct stat st;
-    if (stat(filename, &st) < 0)
-    {
+    if (stat(filename, &st) < 0) {
         printf("st init err\n");
     };
     return st.st_size;
 }
+
+static inline size_t get_file_size(const char *filename)
+{
+    struct stat st;
+    if (stat(filename, &st) < 0) {
+        printf("st init err\n");
+    };
+    return st.st_size;
+}
+
+
+
 /**
 /** @brief
 /  *
@@ -32,40 +61,60 @@ static inline size_t get_file_size(char *filename)
 /* @param current_pos int 文件偏移量
 /  * @return void
 /  */
-
-inline static void write_static_chunked(int fd, char *filename, string header, int current_pos, int CHUNK_SIZE)
+static void write_static(int fd,
+                         char *filename,
+                         int begin_pos,
+                         int end_pos,
+                         string &header)
 {
     int src_fd = open(filename, O_RDONLY, 0);
     if (src_fd < 2)
         printf("open %s error\n", filename);
     // TODO: sendfile（）
-    char buffer[CHUNK_SIZE];
-    memset(buffer, 0, CHUNK_SIZE);
+    char buffer[NORMAL_SIZE];
+    memset(buffer, 0, NORMAL_SIZE);
 
-    // size_t uint
+    // 传输header
     write(fd, header.c_str(), header.size());
 
-    if (current_pos != 0)
-    {
-        lseek(src_fd, current_pos*CHUNK_SIZE, SEEK_SET);
+    if (begin_pos != 0) {
+        lseek(src_fd, begin_pos * NORMAL_SIZE, SEEK_SET);
     }
 
     int rcnt = 0;
     int cnt = 0;
-    do
-    {
-        rcnt = read(src_fd, buffer, CHUNK_SIZE);
-        int res = write(fd, buffer, rcnt);
-        printf("res = %d\n", res);
-    } while (rcnt == CHUNK_SIZE);
-
+    if (end_pos <= 0) {
+        do {
+            rcnt = read(src_fd, buffer, NORMAL_SIZE);
+            int res = write(fd, buffer, rcnt);
+        } while (rcnt == NORMAL_SIZE);
+    } else {
+        int size = end_pos - begin_pos;
+        do {
+            rcnt = read(src_fd, buffer, NORMAL_SIZE);
+            write(fd, buffer, rcnt);
+            size -= NORMAL_SIZE;
+        } while (size > 0);
+    }
     close(src_fd);
     close(fd);
 }
 
-inline static void write_static_uchunked(int fd, char *filename, string header, int current_pos)
+const char *get_file_type(char * filename)
 {
-    write_static_chunked(fd, filename, header, current_pos, get_file_size(filename));
+    string fa(filename);
+    string suffixStr = fa.substr(fa.find_last_of('.'));  //获取文件后缀
+    if (suffixStr.size() == 0)
+        return "text/plain";
+
+    int i;
+    for (i = 0; mime[i].type; ++i) {
+        if (!strcmp(suffixStr.c_str(), mime[i].type))
+            return mime[i].value;
+    }
+    return mime[i].value;
 }
+
+
 
 #endif

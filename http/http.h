@@ -1,6 +1,5 @@
 #ifndef CANDY_HTTP_H
 #define CANDY_HTTP_H
-
 #include <map>
 #include <string>
 #define CR '\r'
@@ -9,14 +8,15 @@
 #define CRLFCRLF "\r\n\r\n"
 #include <iostream>
 #include "../socket/set_socket.h"
+#include "../utils/utils.h"
 using std::cout;
 using std::endl;
 using std::map;
 using std::string;
-
 /**
  * 字符串的buf，只存储对应的指针，不存储实际的内容
  */
+struct HttpResponse;
 struct StringBuffer {
     char *begin = NULL;  //字符串开始位置
     char *end = NULL;    //字符串结束位置
@@ -114,7 +114,7 @@ private:
     HttpRequestDecodeState _decodeState =
         HttpRequestDecodeState::START;  //解析状态
 public:
-    int process_header();
+    friend void process_header(HttpRequest &req, HttpResponse &res);
 };
 
 #define CONTENTTYPE "Content-Type"
@@ -122,24 +122,34 @@ public:
 #define HTML_CONTENT_TYPE "text/html"
 #define STREAM_CONTENT_TYPE "application/octet-stream"
 #define CONTENT_DISPOSTION_VALUE "attachment;filename=xx.xxx"
+#define CONTENT_LENGTH "Content-Length"
+#define CONTENT_RANGE "Content-Range"
 
 enum http_status {
     HTTP_OK = 200,
     HTTP_NOT_MODIFIED = 304,
     HTTP_NOT_FOUND = 404,
 };
+
+
+//###################### response  ###########################//
 class HttpResponse
 {
     // TODO:response builder
+    // httpResponse    FileService<委托>
 private:
+    FileService *f_service;// pimpl composition by reference
     string _protocol;
     string _version;
     string _status;
+    int _status_code;
     map<string, string> _res_headers;
     string _body;
     string response;
     string _url;
     char *filename;
+    int start_pos;
+    int end_pos;
 
 public:
     HttpResponse(const HttpRequest &req, uint16_t flag, char *filename);
@@ -147,10 +157,25 @@ public:
                             const string &header_value);
     HttpResponse &setBody(string &_body);
     string getResponseStr();
-    void setStatus(int st);
+    string getHeaderStr();
+    void setStCode(int code);
+    
+    void setFileService();
+    friend void process_header(HttpRequest &req, HttpResponse &res);
 };
 // class File_Service
 // {
 // };
-
+static string mapCode2Status(int code)
+{
+    switch (code) {
+    case 200:
+        return "OK";
+        break;
+    case 206:
+        return "Partial Content";
+        break;
+    }
+    return "";
+}
 #endif

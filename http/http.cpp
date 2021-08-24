@@ -1,7 +1,11 @@
 #include "http.h"
 #include <string.h>
 #include <vector>
+
+#include "file_service/file_service.h"
 //协议解析
+
+
 void HttpRequest::tryDecode(const std::string &buf)
 {
     this->parseInternal(buf.c_str(), buf.size());
@@ -335,13 +339,27 @@ const std::string &HttpRequest::getBody() const
     return _body;
 }
 
-int HttpRequest::process_header()
+void process_header(HttpRequest &req, HttpResponse &res)
 {
     map<string, string>::iterator iter;
-    for (iter = _headers.begin(); iter != _headers.end(); ++iter) {
-        cout << iter->first << "********" << iter->second << endl;
+    for (iter = req._headers.begin(); iter != req._headers.end(); ++iter) {
+        if (iter->first == "Range") {
+            // Range: bytes=0-1023
+            string range = iter->second;
+            vector<string> tokens;
+            split(range, tokens, '-');
+            res.setStCode(206);
+            res.start_pos = std::stoi(tokens[0]);
+            res.end_pos = std::stoi(tokens[1]);
+            res.addHeader(CONTENT_LENGTH,
+                          std::to_string(res.end_pos - res.start_pos));
+            tokens.clear();
+            range[5] = ' ';
+            res.addHeader(
+                CONTENT_RANGE,
+                range.append(std::to_string(get_file_size(res.filename))));
+        }
     }
-    return 0;
 }
 
 HttpResponse::HttpResponse(const HttpRequest &req,
@@ -352,9 +370,11 @@ HttpResponse::HttpResponse(const HttpRequest &req,
     _protocol = req.getProtocol();
     // TODO:status
     http_status status = HTTP_OK;
-    _status = "200";
+    _status = "OK";
+    _status_code = 200;
     _url = req.getUrl();
     this->filename = filename;
+   
 }
 HttpResponse &HttpResponse::addHeader(const string &header_name,
                                       const string &header_value)
@@ -375,7 +395,6 @@ string HttpResponse::getResponseStr()
     res.append(" ");
     res.append(_status);
     res.append(CRLF);
-
     for (auto item : _res_headers) {
         res.append(item.first + ":" + item.second + CRLF);
     }
@@ -383,7 +402,8 @@ string HttpResponse::getResponseStr()
     res.append(_body);
     return res;
 }
-void HttpResponse::setStatus(int st)
+void HttpResponse::setStCode(int code)
 {
-    _status = st;
+    _status_code = code;
+    this->_status = mapCode2Status(code);
 }

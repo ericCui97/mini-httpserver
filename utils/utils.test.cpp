@@ -6,7 +6,7 @@ using namespace std;
 int main(){
     vector<string> tokens;
     string str("0-1231");
-    split(str,tokens,'-');
+    s_split(str,tokens,'-');
     for(auto el:tokens){
         cout<<el<<endl;
     }

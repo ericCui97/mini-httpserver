@@ -6,7 +6,7 @@
 using std::string;
 using std::vector;
 
-  void split(const string &s, vector<string> &tokens, char delim = ' ')
+  void s_split(const string &s, vector<string> &tokens, char delim = ' ')
 {
     tokens.clear();
     auto string_find_first_not = [s, delim](size_t pos = 0) -> size_t {

@@ -10,7 +10,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <iostream>
-#include "logger.h"
+#include "../logger.h"
 #define NORMAL_SIZE 4096
 using namespace std;
 using std::string;
@@ -32,14 +32,7 @@ static mime_type_t mime[] = {{".html", "text/html"},
                              {NULL, "text/plain"}};
 
 
-static inline size_t get_file_size(char *filename)
-{
-    struct stat st;
-    if (stat(filename, &st) < 0) {
-        printf("st init err\n");
-    };
-    return st.st_size;
-}
+
 
 static inline size_t get_file_size(const char *filename)
 {
@@ -61,6 +54,8 @@ static inline size_t get_file_size(const char *filename)
 /* @param current_pos int 文件偏移量
 /  * @return void
 /  */
+
+#define FIlEEND -1
 static void write_static(int fd,
                          char *filename,
                          int begin_pos,
@@ -91,6 +86,7 @@ static void write_static(int fd,
     } else {
         int size = end_pos - begin_pos;
         do {
+
             rcnt = read(src_fd, buffer, NORMAL_SIZE);
             write(fd, buffer, rcnt);
             size -= NORMAL_SIZE;
@@ -100,7 +96,7 @@ static void write_static(int fd,
     close(fd);
 }
 
-const char *get_file_type(char * filename)
+static const char *get_file_type(const char * filename)
 {
     string fa(filename);
     string suffixStr = fa.substr(fa.find_last_of('.'));  //获取文件后缀

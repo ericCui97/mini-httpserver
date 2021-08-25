@@ -2,7 +2,7 @@
 #include <string.h>
 #include <vector>
 
-#include "file_service/file_service.h"
+
 //协议解析
 
 
@@ -347,7 +347,9 @@ void process_header(HttpRequest &req, HttpResponse &res)
             // Range: bytes=0-1023
             string range = iter->second;
             vector<string> tokens;
-            split(range, tokens, '-');
+            // s_split(range, tokens, '-');
+            tokens.push_back("0");
+            tokens.push_back("1024");
             res.setStCode(206);
             res.start_pos = std::stoi(tokens[0]);
             res.end_pos = std::stoi(tokens[1]);
@@ -374,7 +376,6 @@ HttpResponse::HttpResponse(const HttpRequest &req,
     _status_code = 200;
     _url = req.getUrl();
     this->filename = filename;
-   
 }
 HttpResponse &HttpResponse::addHeader(const string &header_name,
                                       const string &header_value)

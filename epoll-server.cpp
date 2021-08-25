@@ -175,25 +175,16 @@ int main()
                         continue;
                     }
                     else
-                    {
-                        HttpRequest req;
-                        cout << "test" << endl;
-                        req.tryDecode(msg);
-                        req.process_header();
-
+                    {                  
                         string header(
                             "HTTP/1.1 200 OK\r\n"
                             "Content-Type:application/octet-stream\r\n"
                             "Content-Disposition:attachment; "
-                            "filename=test\r\n"
+                            "filename=test.video\r\n"
                             "Connection:Keep-Alive"
                             "\r\n\r\n");
-                        // write_static_chunked(tmp_epoll_recv_fd, "./test", header, 0, NORMAL_SIZE);
-                        //write(tmp_epoll_recv_fd, header.c_str(), header.size());
-                        // string res = buildResponse("<h1>hello</h1>");
-                        // cout<<res<<endl;
-                        // write(tmp_epoll_recv_fd, res.c_str(), res.size());
-                        // close(tmp_epoll_recv_fd);
+                            write_static(tmp_epoll_recv_fd,"./test.mp4",0,FIlEEND,header);
+                        
                     }
                 }
             }

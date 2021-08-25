@@ -7,15 +7,39 @@
 #define CRLF "\r\n"
 #define CRLFCRLF "\r\n\r\n"
 #include <iostream>
+#include <string>
+#include <vector>
+#include "../file_service/file_service.h"
 #include "../socket/set_socket.h"
-#include "../utils/utils.h"
 using std::cout;
 using std::endl;
 using std::map;
 using std::string;
+
+
+// static void s_split(const string &s, vector<string> &tokens, char delim = '
+// ')
+// {
+//     tokens.clear();
+//     auto string_find_first_not = [s, delim](size_t pos = 0) -> size_t {
+//         for (size_t i = pos; i < s.size(); i++) {
+//             if (s[i] != delim)
+//                 return i;
+//         }
+//         return string::npos;
+//     };
+// size_t lastPos = string_find_first_not(0);
+// size_t pos = s.find(delim, lastPos);
+// while (lastPos != string::npos) {
+//     tokens.emplace_back(s.substr(lastPos, pos - lastPos));
+//     lastPos = string_find_first_not(pos);
+//     pos = s.find(delim, lastPos);
+// }
 /**
  * 字符串的buf，只存储对应的指针，不存储实际的内容
  */
+
+
 struct HttpResponse;
 struct StringBuffer {
     char *begin = NULL;  //字符串开始位置
@@ -138,7 +162,7 @@ class HttpResponse
     // TODO:response builder
     // httpResponse    FileService<委托>
 private:
-    FileService *f_service;// pimpl composition by reference
+    // FileService *f_service;// pimpl composition by reference
     string _protocol;
     string _version;
     string _status;
@@ -159,7 +183,7 @@ public:
     string getResponseStr();
     string getHeaderStr();
     void setStCode(int code);
-    
+
     void setFileService();
     friend void process_header(HttpRequest &req, HttpResponse &res);
 };

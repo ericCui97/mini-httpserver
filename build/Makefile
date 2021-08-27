@@ -123,33 +123,6 @@ epollserver/fast:
 	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/build
 .PHONY : epollserver/fast
 
-epoll-server.o: epoll-server.cpp.o
-
-.PHONY : epoll-server.o
-
-# target to build an object file
-epoll-server.cpp.o:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/epoll-server.cpp.o
-.PHONY : epoll-server.cpp.o
-
-epoll-server.i: epoll-server.cpp.i
-
-.PHONY : epoll-server.i
-
-# target to preprocess a source file
-epoll-server.cpp.i:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/epoll-server.cpp.i
-.PHONY : epoll-server.cpp.i
-
-epoll-server.s: epoll-server.cpp.s
-
-.PHONY : epoll-server.s
-
-# target to generate assembly for a file
-epoll-server.cpp.s:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/epoll-server.cpp.s
-.PHONY : epoll-server.cpp.s
-
 http/http.o: http/http.cpp.o
 
 .PHONY : http/http.o
@@ -177,6 +150,60 @@ http/http.cpp.s:
 	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/http/http.cpp.s
 .PHONY : http/http.cpp.s
 
+run.o: run.cpp.o
+
+.PHONY : run.o
+
+# target to build an object file
+run.cpp.o:
+	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/run.cpp.o
+.PHONY : run.cpp.o
+
+run.i: run.cpp.i
+
+.PHONY : run.i
+
+# target to preprocess a source file
+run.cpp.i:
+	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/run.cpp.i
+.PHONY : run.cpp.i
+
+run.s: run.cpp.s
+
+.PHONY : run.s
+
+# target to generate assembly for a file
+run.cpp.s:
+	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/run.cpp.s
+.PHONY : run.cpp.s
+
+server/route.o: server/route.cpp.o
+
+.PHONY : server/route.o
+
+# target to build an object file
+server/route.cpp.o:
+	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/server/route.cpp.o
+.PHONY : server/route.cpp.o
+
+server/route.i: server/route.cpp.i
+
+.PHONY : server/route.i
+
+# target to preprocess a source file
+server/route.cpp.i:
+	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/server/route.cpp.i
+.PHONY : server/route.cpp.i
+
+server/route.s: server/route.cpp.s
+
+.PHONY : server/route.s
+
+# target to generate assembly for a file
+server/route.cpp.s:
+	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/server/route.cpp.s
+.PHONY : server/route.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +213,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... epollserver"
 	@echo "... edit_cache"
-	@echo "... epoll-server.o"
-	@echo "... epoll-server.i"
-	@echo "... epoll-server.s"
 	@echo "... http/http.o"
 	@echo "... http/http.i"
 	@echo "... http/http.s"
+	@echo "... run.o"
+	@echo "... run.i"
+	@echo "... run.s"
+	@echo "... server/route.o"
+	@echo "... server/route.i"
+	@echo "... server/route.s"
 .PHONY : help
 
 

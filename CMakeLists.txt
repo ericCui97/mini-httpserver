@@ -3,9 +3,13 @@ project(httpd)
 
 set(CMAKE_CXX_STANDARD 14)
 
-# add_executable(httpdtest http-test.cpp http/http.h http/http.cpp  socket/set_socket.h)
+# add_executable(httpdtest http/http-test.cpp http/http.h http/http.cpp  socket/set_socket.h file_service/file_service.h)
 add_executable(epollserver
- epoll-server.cpp 
+mainloop.h
+run.cpp
+server/route.h
+server/server.h
+server/route.cpp
  http/http.h 
  http/http.cpp 
  socket/set_socket.h

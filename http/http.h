@@ -17,29 +17,8 @@ using std::map;
 using std::string;
 
 
-// static void s_split(const string &s, vector<string> &tokens, char delim = '
-// ')
-// {
-//     tokens.clear();
-//     auto string_find_first_not = [s, delim](size_t pos = 0) -> size_t {
-//         for (size_t i = pos; i < s.size(); i++) {
-//             if (s[i] != delim)
-//                 return i;
-//         }
-//         return string::npos;
-//     };
-// size_t lastPos = string_find_first_not(0);
-// size_t pos = s.find(delim, lastPos);
-// while (lastPos != string::npos) {
-//     tokens.emplace_back(s.substr(lastPos, pos - lastPos));
-//     lastPos = string_find_first_not(pos);
-//     pos = s.find(delim, lastPos);
-// }
-/**
- * 字符串的buf，只存储对应的指针，不存储实际的内容
- */
-
-
+#define HTML_TYPE 1
+#define SOCK_STREAM 2
 struct HttpResponse;
 struct StringBuffer {
     char *begin = NULL;  //字符串开始位置
@@ -115,13 +94,18 @@ struct HttpRequest {
     const std::map<std::string, std::string> &getHeaders() const;
 
     const std::string &getBody() const;
+    bool isKeepAlive() { return is_keep_alive; }
+    void setKeepAlive(bool b) { is_keep_alive = b; }
+    void setFD(int fd) { this->_fd = fd; }
+    int getFD() { return this->_fd; }
 
 private:
     void parseInternal(const char *buf, int size);
 
 private:
+    int _fd;
     string _method;  //请求方法
-
+    bool is_keep_alive = false;
     string _url;  //请求路径[不包含请求参数]
 
     map<string, string> _requestParams;  //请求参数
@@ -140,6 +124,7 @@ private:
 public:
     friend void process_header(HttpRequest &req, HttpResponse &res);
 };
+
 
 #define CONTENTTYPE "Content-Type"
 #define CONTENT_DISPOSTION "Content-Disposition"
@@ -166,26 +151,35 @@ private:
     string _protocol;
     string _version;
     string _status;
-    int _status_code;
+    int _status_code = 200;
     map<string, string> _res_headers;
     string _body;
     string response;
     string _url;
-    char *filename;
-    int start_pos;
-    int end_pos;
+    char *filename = "index.html";
+    int start_pos = 0;
+    int end_pos = -1;
+    // type: 1:file 2:html
+    int type;
+    bool isChunked = false;
+
+    int _fd;
+    bool is_range = false;
 
 public:
-    HttpResponse(const HttpRequest &req, uint16_t flag, char *filename);
+    HttpResponse(HttpRequest &req, uint16_t type, char *filename);
     HttpResponse &addHeader(const string &header_name,
                             const string &header_value);
     HttpResponse &setBody(string &_body);
     string getResponseStr();
     string getHeaderStr();
     void setStCode(int code);
-
+    void setChunked() { this->isChunked = true; };
+    bool IsChunked() { return this->isChunked; };
+    bool IsRange() { return is_range; };
     void setFileService();
     friend void process_header(HttpRequest &req, HttpResponse &res);
+    void send();
 };
 // class File_Service
 // {
@@ -198,6 +192,9 @@ static string mapCode2Status(int code)
         break;
     case 206:
         return "Partial Content";
+        break;
+    case 302:
+        return "Found";
         break;
     }
     return "";

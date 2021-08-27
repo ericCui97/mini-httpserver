@@ -1,10 +1,14 @@
 #include "http.h"
 #include <string.h>
 #include <vector>
-
+#include "../utils/utils.h"
 
 //协议解析
 
+static int accessable(const char *pathname)
+{
+    return access(pathname, F_OK | R_OK);
+}
 
 void HttpRequest::tryDecode(const std::string &buf)
 {
@@ -343,31 +347,57 @@ void process_header(HttpRequest &req, HttpResponse &res)
 {
     map<string, string>::iterator iter;
     for (iter = req._headers.begin(); iter != req._headers.end(); ++iter) {
-        if (iter->first == "Range") {
+        if (iter->first.compare("Range") == 0) {
             // Range: bytes=0-1023
             string range = iter->second;
-            vector<string> tokens;
-            // s_split(range, tokens, '-');
-            tokens.push_back("0");
-            tokens.push_back("1024");
+            range[5] = ' ';
+            range.append("/");
+            vector<int> tokens;
+            getNumberByReg(range, tokens);
             res.setStCode(206);
-            res.start_pos = std::stoi(tokens[0]);
-            res.end_pos = std::stoi(tokens[1]);
+            res.is_range = true;
+            res.start_pos = tokens[0];
+            res.end_pos = tokens[1];
             res.addHeader(CONTENT_LENGTH,
                           std::to_string(res.end_pos - res.start_pos));
             tokens.clear();
-            range[5] = ' ';
+            res.addHeader("Accept-Ranges", "bytes");
             res.addHeader(
                 CONTENT_RANGE,
                 range.append(std::to_string(get_file_size(res.filename))));
         }
+        if (iter->first.compare("Connection") == 0 &&
+            iter->second.compare("Keep-Alive") == 0) {
+            res.addHeader("Connection", "Keep-Alive");
+            req.setKeepAlive(true);
+        }
+        if (res.IsChunked()) {
+            res.addHeader("Transfer-Encoding", "chunked");
+        }
+    }
+    printf("access:%d", accessable(res.filename));
+    if (accessable(res.filename) != 0) {
+        res.setStCode(302);
+        res.addHeader("Location", "/302.html");
     }
 }
 
-HttpResponse::HttpResponse(const HttpRequest &req,
-                           uint16_t flag,
-                           char *filename)
+HttpResponse::HttpResponse(HttpRequest &req, uint16_t type, char *filename)
 {
+    this->type = type;
+    switch (type) {
+    case 1:  // html/txt
+        addHeader("Content-Type", "text/html");
+        break;
+    case 2:  // binary
+        addHeader("Content-Type", "application/octet-stream");
+        addHeader("Content-Disposition", "attachment");
+        addHeader("filename", filename);
+        break;
+    default:
+        addHeader("Content-Type", "application/octet-stream");
+        break;
+    }
     _version = req.getVersion();
     _protocol = req.getProtocol();
     // TODO:status
@@ -375,7 +405,12 @@ HttpResponse::HttpResponse(const HttpRequest &req,
     _status = "OK";
     _status_code = 200;
     _url = req.getUrl();
+    _fd = req.getFD();
+
     this->filename = filename;
+    // cout<<get_file_type("test.mp4")<<endl;
+    // addHeader(CONTENTTYPE, get_file_type(filename));
+    process_header(req, *this);
 }
 HttpResponse &HttpResponse::addHeader(const string &header_name,
                                       const string &header_value)
@@ -387,24 +422,39 @@ HttpResponse &HttpResponse::setBody(string &_body)
 {
     this->_body = _body;
 }
-string HttpResponse::getResponseStr()
+string HttpResponse::getHeaderStr()
 {
     string res("");
     res.append(_protocol);
-    res.append(_url);
+    res.append("/");
     res.append(_version);
     res.append(" ");
-    res.append(_status);
+    res.append(std::to_string(_status_code));
+    res.append(" ");
+    res.append(mapCode2Status(_status_code));
     res.append(CRLF);
     for (auto item : _res_headers) {
         res.append(item.first + ":" + item.second + CRLF);
     }
     res.append(CRLFCRLF);
-    res.append(_body);
     return res;
+}
+string HttpResponse::getResponseStr()
+{
+    return this->getHeaderStr() + _body;
 }
 void HttpResponse::setStCode(int code)
 {
     _status_code = code;
     this->_status = mapCode2Status(code);
+}
+
+void HttpResponse::send()
+{
+    string headerStr = getHeaderStr();
+    if (IsChunked()) {
+        write_chunked(_fd, filename, 1024, headerStr);
+    } else {
+        write_static(_fd, filename, start_pos, end_pos, headerStr);
+    }
 }

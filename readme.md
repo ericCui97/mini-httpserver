@@ -77,15 +77,21 @@ int main()
 > 测试方式：在postman或者curl中设置chunked请求头
 具体实现见file_service/file_service.h
 
+
+
 range 和 chunk在file_service 下均有单元测试
 
 目前的实现只支持tranfer-encoding:chunked和固定chunk大小
+[![hGkYcQ.md.png](https://z3.ax1x.com/2021/08/29/hGkYcQ.md.png)](https://imgtu.com/i/hGkYcQ)
 
 ### range下载
 
 目前只支持单一范围的range，也就是Range: bytes=0-1023这种形式
 实现代码如下
 > 测试方式：在postman或者curl中设置range请求头
+[![hGFoOs.md.png](https://z3.ax1x.com/2021/08/29/hGFoOs.md.png)](https://imgtu.com/i/hGFoOs)
+
+
 ### 长链接
 测试：请求头中加入connection:keep-alive 字段
 实现如下：
@@ -132,3 +138,4 @@ inline static int setKeepALive(int _fd, int idle, int intv, int cnt)
 运行之后输入不存在的url路由，会返回302响应，重定向到302 页面
 
 使用access 函数实现
+![](https://s3.bmp.ovh/imgs/2021/08/a9a7de7bc4505635.png)

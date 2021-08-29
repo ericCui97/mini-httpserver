@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver
+CMAKE_SOURCE_DIR = /home/cui/mini-httpserver
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build
+CMAKE_BINARY_DIR = /home/cui/mini-httpserver/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cui/mini-httpserver/build/CMakeFiles /home/cui/mini-httpserver/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /workspaces/dockerdev/epoll-echo-server/sehttpd/myhttpserver/mini-httpserver/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cui/mini-httpserver/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,32 +123,59 @@ epollserver/fast:
 	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/build
 .PHONY : epollserver/fast
 
-http/http.o: http/http.cpp.o
+http.o: http.cpp.o
 
-.PHONY : http/http.o
+.PHONY : http.o
 
 # target to build an object file
-http/http.cpp.o:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/http/http.cpp.o
-.PHONY : http/http.cpp.o
+http.cpp.o:
+	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/http.cpp.o
+.PHONY : http.cpp.o
 
-http/http.i: http/http.cpp.i
+http.i: http.cpp.i
 
-.PHONY : http/http.i
+.PHONY : http.i
 
 # target to preprocess a source file
-http/http.cpp.i:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/http/http.cpp.i
-.PHONY : http/http.cpp.i
+http.cpp.i:
+	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/http.cpp.i
+.PHONY : http.cpp.i
 
-http/http.s: http/http.cpp.s
+http.s: http.cpp.s
 
-.PHONY : http/http.s
+.PHONY : http.s
 
 # target to generate assembly for a file
-http/http.cpp.s:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/http/http.cpp.s
-.PHONY : http/http.cpp.s
+http.cpp.s:
+	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/http.cpp.s
+.PHONY : http.cpp.s
+
+route.o: route.cpp.o
+
+.PHONY : route.o
+
+# target to build an object file
+route.cpp.o:
+	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/route.cpp.o
+.PHONY : route.cpp.o
+
+route.i: route.cpp.i
+
+.PHONY : route.i
+
+# target to preprocess a source file
+route.cpp.i:
+	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/route.cpp.i
+.PHONY : route.cpp.i
+
+route.s: route.cpp.s
+
+.PHONY : route.s
+
+# target to generate assembly for a file
+route.cpp.s:
+	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/route.cpp.s
+.PHONY : route.cpp.s
 
 run.o: run.cpp.o
 
@@ -177,33 +204,6 @@ run.cpp.s:
 	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/run.cpp.s
 .PHONY : run.cpp.s
 
-server/route.o: server/route.cpp.o
-
-.PHONY : server/route.o
-
-# target to build an object file
-server/route.cpp.o:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/server/route.cpp.o
-.PHONY : server/route.cpp.o
-
-server/route.i: server/route.cpp.i
-
-.PHONY : server/route.i
-
-# target to preprocess a source file
-server/route.cpp.i:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/server/route.cpp.i
-.PHONY : server/route.cpp.i
-
-server/route.s: server/route.cpp.s
-
-.PHONY : server/route.s
-
-# target to generate assembly for a file
-server/route.cpp.s:
-	$(MAKE) -f CMakeFiles/epollserver.dir/build.make CMakeFiles/epollserver.dir/server/route.cpp.s
-.PHONY : server/route.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,15 +213,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... epollserver"
 	@echo "... edit_cache"
-	@echo "... http/http.o"
-	@echo "... http/http.i"
-	@echo "... http/http.s"
+	@echo "... http.o"
+	@echo "... http.i"
+	@echo "... http.s"
+	@echo "... route.o"
+	@echo "... route.i"
+	@echo "... route.s"
 	@echo "... run.o"
 	@echo "... run.i"
 	@echo "... run.s"
-	@echo "... server/route.o"
-	@echo "... server/route.i"
-	@echo "... server/route.s"
 .PHONY : help
 
 

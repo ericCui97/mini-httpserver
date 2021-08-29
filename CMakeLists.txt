@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(httpd)
+project(epoll_server)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -7,12 +7,13 @@ set(CMAKE_CXX_STANDARD 14)
 add_executable(epollserver
 mainloop.h
 run.cpp
-server/route.h
-server/server.h
-server/route.cpp
- http/http.h 
- http/http.cpp 
- socket/set_socket.h
- file_service/file_service.h
+route.h
+server.h
+route.cpp
+ http.h 
+ http.cpp 
+ set_socket.h
+ file_service.h
  logger.h
+ utils.h
  )

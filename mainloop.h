@@ -20,14 +20,14 @@
 #include <map>
 
 #include <iostream>
-#include "./server/route.h"
-#include "./socket/set_socket.h"
-#include "file_service/file_service.h"
-#include "http/http.h"
+#include "route.h"
+#include "set_socket.h"
+#include "file_service.h"
+#include "http.h"
 #include "logger.h"
 #define MAXSIZE 1024
-#define IP_ADDR "127.0.0.1"
-#define IP_PORT 9999
+ #define IP_ADDR "127.0.0.1"
+ #define IP_PORT 9999
 
 
 using namespace std;
@@ -87,7 +87,8 @@ int mainloop(const char *server_ip, const int port, node &no)
     st_sersock.sin_family = AF_INET;  // IPv4协议
     st_sersock.sin_addr.s_addr = htonl(
         INADDR_ANY);  // INADDR_ANY转换过来就是0.0.0.0，泛指本机的意思，也就是表示本机的所有IP，因为有些机子不止一块网卡，多网卡的情况下，这个就表示所有网卡ip地址的意思。
-    st_sersock.sin_port = htons(port);
+    st_sersock.sin_port = htons(IP_PORT);
+    std::cout<<st_sersock.sin_port<<endl;
 
     if (bind(i_listenfd, (struct sockaddr *) &st_sersock, sizeof(st_sersock)) <
         0)  //将套接字绑定IP和端口用于监听
@@ -98,6 +99,7 @@ int mainloop(const char *server_ip, const int port, node &no)
 
     if (listen(i_listenfd, 20) < 0)  //设定可同时排队的客户端最大连接个数
     {
+        printf("ferjgfier\n");
         printf("listen Error: %s (errno: %d)\n", strerror(errno), errno);
         exit(0);
     }
@@ -165,7 +167,7 @@ int mainloop(const char *server_ip, const int port, node &no)
                     epoll_ctl(epfd, EPOLL_CTL_MOD, tmp_epoll_recv_fd, &ev);
 
                     HttpRequest req;
-                    req.setFD(tmp_epoll_recv_fd);
+                    req._fd=tmp_epoll_recv_fd;
                     req.tryDecode(msg);
                     rmap.emplace(tmp_epoll_recv_fd, req);
                 } else if (events[i].events == EPOLLOUT) {

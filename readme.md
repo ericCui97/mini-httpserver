@@ -2,7 +2,7 @@
 
 
 
-## 1. [需求文档](https://docs.google.com/presentation/d/1nm4f_xyorsatzBByqdXJqUF1fjEQ9YBJUUoU16lpzQQ/edit#slide=id.ge77af77a78_0_82)
+## 1. 需求文档
 
 ## 2.完成情况
 

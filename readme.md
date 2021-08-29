@@ -32,6 +32,7 @@ make
 
 
 ## 测试结果
+下载带宽换算约为350mbps
 
 ![](https://s3.bmp.ovh/imgs/2021/08/ada23dfb16839f18.png)
 
@@ -58,7 +59,8 @@ int main()
 
 ```
 
-
+本项目的简要uml设计：
+![h8jXKf.md.png](https://z3.ax1x.com/2021/08/29/h8jXKf.md.png)](https://imgtu.com/i/h8jXKf)
 ### 解析http请求 
 使用fsm进行解析，具体参考了[这篇文章](https://www.dazhuanlan.com/chasingsouls/topics/1354274)的思路，在httprequest类中的trydecode方法中实现
 
@@ -127,6 +129,6 @@ inline static int setKeepALive(int _fd, int idle, int intv, int cnt)
 ```
 
 ### 302 重定向
-运行之后输入不存在的url路由，会返回302响应，并在host中指定返回的站点
+运行之后输入不存在的url路由，会返回302响应，重定向到302 页面
 
 使用access 函数实现

@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include "file_service.h"
+#include "outgoing.h"
 #include "set_socket.h"
 using std::cout;
 using std::endl;
@@ -17,7 +18,7 @@ using std::map;
 using std::string;
 
 #define HTML_TYPE 1
-#define SOCK_STREAM 2
+#define BINARY_TYPE 2
 class HttpResponse;
 struct StringBuffer
 {
@@ -102,6 +103,7 @@ public:
     void setFD(int fd);
     int getFD();
     int _fd;
+    Outgoing *outgoing = nullptr;
 
 private:
     void parseInternal(const char *buf, int size);
@@ -159,7 +161,7 @@ private:
     string _body;
     string response;
     string _url;
-    char *filename = "index.html";
+    const char *filename = "index.html";
     int start_pos = 0;
     int end_pos = -1;
     // type: 1:file 2:html
@@ -168,16 +170,21 @@ private:
 
     int _fd;
     bool is_range = false;
+    Outgoing *outgoing = nullptr;
 
 public:
-    HttpResponse(HttpRequest &req, uint16_t type, char *filename);
+    HttpResponse(HttpRequest &req, uint16_t type, const char *filename);
     HttpResponse &addHeader(const string &header_name,
                             const string &header_value);
     HttpResponse &setBody(string &_body);
     string getResponseStr();
     string getHeaderStr();
     void setStCode(int code);
-    void setChunked() { this->isChunked = true; };
+    void setChunked() {
+        this->isChunked = true;
+        _res_headers.erase(CONTENT_LENGTH);
+        addHeader("Transfer-Encoding", "chunked");
+    };
     bool IsChunked() { return this->isChunked; };
     bool IsRange() { return is_range; };
     void setFileService();
@@ -185,7 +192,15 @@ public:
     friend void SEND(HttpResponse &res)
     {
         string headerStr = res.getHeaderStr();
-        if (res.IsChunked())
+        if (res.outgoing) {
+            res.outgoing->prepare(headerStr, res._status_code >= 400 ? nullptr : res.filename,
+                                  res.start_pos, res.end_pos, res.IsChunked());
+            return;
+        }
+        if (res._status_code >= 400) {
+            write_all(res._fd, headerStr.data(), headerStr.size());
+        }
+        else if (res.IsChunked())
         {
             write_chunked(res._fd, res.filename, 1024, headerStr);
         }
@@ -210,6 +225,10 @@ static string mapCode2Status(int code)
     case 206:
         return "Partial Content";
         break;
+    case 404:
+        return "Not Found";
+    case 416:
+        return "Range Not Satisfiable";
     case 302:
         return "Found";
         break;

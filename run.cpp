@@ -6,6 +6,10 @@ int main()
     server.bind("127.0.0.1");
     server.listen(9999);
 
+    server.GET("/", [](HttpRequest &req) {
+        HttpResponse res(req, HTML_TYPE, "hello.html");
+        SEND(res);
+    });
     server.GET("/hello", [](HttpRequest &req)
                {
                    HttpResponse res(req, HTML_TYPE, "hello.html");
@@ -13,8 +17,8 @@ int main()
                });
     server.GET("/100M", [](HttpRequest &req)
                {
-                   HttpResponse res(req, SOCK_STREAM, "100M");
+                   HttpResponse res(req, BINARY_TYPE, "100M");
                    SEND(res);
                });
-    server.Run();
+    return server.Run();
 }

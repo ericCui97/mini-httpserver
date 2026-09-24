@@ -18,18 +18,28 @@
 - [x] range
 - [x] 302
 
-## 运行方式
+## 运行方式（macOS / Linux）
+
+依赖 C++14 编译器和 CMake。macOS 使用 Xcode Command Line Tools，CMake 可通过 `brew install cmake` 安装。
 
 ```bash
-cd build
-cmake ..
-make
-
-./epollserver
-
+./run.sh
 ```
 
+脚本会在独立的 `build-local` 目录构建，复制示例页面并生成 100 MiB 下载文件，避免使用仓库中遗留的 Linux 构建缓存。启动后访问：
 
+- http://127.0.0.1:9999/ 或 `/hello`：示例页面。
+- http://127.0.0.1:9999/100M：下载测试文件。
+
+按 Ctrl+C 停止。服务运行时，可在另一个终端执行：
+
+```bash
+python3 tests/smoke.py
+clang++ -std=c++14 -fsanitize=undefined -g tests/outgoing.cpp -o build-local/outgoing-test
+build-local/outgoing-test
+```
+
+当前事件循环使用 macOS 和 Linux 均支持的 `poll`，只绑定本机回环地址。使用非阻塞 socket，根据 `POLLOUT` 分批发送文件，每轮每连接最多发送 256 KiB；每次响应后关闭 HTTP 连接，不支持 HTTP keep-alive 和 pipeline。TCP 保活与 HTTP 长连接是不同功能。未知路由返回 404。Range 支持单个显式区间（例如 `bytes=5-37`）。下方为原项目的历史功能说明和测试记录，不代表本次版本全部经过验证。
 
 ## 测试结果
 下载带宽换算约为350mbps

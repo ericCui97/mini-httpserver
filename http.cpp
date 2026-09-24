@@ -1,5 +1,7 @@
 #include "http.h"
 #include <string.h>
+#include <climits>
+#include <algorithm>
 #include <vector>
 #include "utils.h"
 
@@ -346,45 +348,44 @@ const std::string &HttpRequest::getBody() const
 
 void process_header(HttpRequest &req, HttpResponse &res)
 {
-    map<string, string>::iterator iter;
-    for (iter = req._headers.begin(); iter != req._headers.end(); ++iter) {
-        if (iter->first.compare("Range") == 0) {
-            // Range: bytes=0-1023
-            string range = iter->second;
-            range[5] = ' ';
-            range.append("/");
-            vector<int> tokens;
-            getNumberByReg(range, tokens);
-            res.setStCode(206);
-            res.is_range = true;
-            res.start_pos = tokens[0];
-            res.end_pos = tokens[1];
-            res.addHeader(CONTENT_LENGTH,
-                          std::to_string(res.end_pos - res.start_pos));
-            tokens.clear();
-            res.addHeader("Accept-Ranges", "bytes");
-            res.addHeader(
-                CONTENT_RANGE,
-                range.append(std::to_string(get_file_size(res.filename))));
-        }
-        if (iter->first.compare("Connection") == 0 &&
-            iter->second.compare("Keep-Alive") == 0) {
-            res.addHeader("Connection", "Keep-Alive");
-            req.setKeepAlive(true);
-        }
-        if (res.IsChunked()) {
-            res.addHeader("Transfer-Encoding", "chunked");
-        }
-    }
-    printf("access:%d", accessable(res.filename));
+    res.addHeader("Connection", "close");
     if (accessable(res.filename) != 0) {
-        res.setStCode(302);
-        res.addHeader("Location", "/302.html");
+        res.setStCode(404);
+        res.addHeader(CONTENT_LENGTH, "0");
+        return;
+    }
+    const size_t size = get_file_size(res.filename);
+    res.addHeader(CONTENT_LENGTH, std::to_string(size));
+    res.addHeader("Accept-Ranges", "bytes");
+    for (const auto &header : req._headers) {
+        std::string key = header.first;
+        for (char &ch : key) ch = std::tolower(static_cast<unsigned char>(ch));
+        if (key != "range") continue;
+        // Preserve the existing single explicit byte-range API.
+        std::smatch match;
+        if (!std::regex_match(header.second, match, std::regex("bytes=([0-9]+)-([0-9]+)")))
+            continue;
+        try {
+            const auto start = std::stoull(match[1].str());
+            const auto end = std::stoull(match[2].str());
+            if (start >= size || end < start || end > INT_MAX) throw std::out_of_range("range");
+            res.start_pos = static_cast<int>(start);
+            res.end_pos = static_cast<int>(std::min<unsigned long long>(end, size - 1));
+            res.is_range = true;
+            res.setStCode(206);
+            res.addHeader(CONTENT_LENGTH, std::to_string(res.end_pos - res.start_pos + 1));
+            res.addHeader(CONTENT_RANGE, "bytes " + std::to_string(res.start_pos) + "-" +
+                          std::to_string(res.end_pos) + "/" + std::to_string(size));
+        } catch (const std::exception &) {
+            res.setStCode(416);
+            res.addHeader(CONTENT_LENGTH, "0");
+            res.addHeader(CONTENT_RANGE, "bytes */" + std::to_string(size));
+        }
     }
 }
 
 
-HttpResponse::HttpResponse(HttpRequest &req, uint16_t type, char *filename)
+HttpResponse::HttpResponse(HttpRequest &req, uint16_t type, const char *filename)
 {
     this->type = type;
     switch (type) {
@@ -408,6 +409,7 @@ HttpResponse::HttpResponse(HttpRequest &req, uint16_t type, char *filename)
     _status_code = 200;
     _url = req.getUrl();
     _fd = req.getFD();
+    outgoing = req.outgoing;
 
     this->filename = filename;
     // cout<<get_file_type("test.mp4")<<endl;
@@ -417,12 +419,14 @@ HttpResponse::HttpResponse(HttpRequest &req, uint16_t type, char *filename)
 HttpResponse &HttpResponse::addHeader(const string &header_name,
                                       const string &header_value)
 {
-    _res_headers.insert({header_name, header_value});
+    _res_headers[header_name] = header_value;
+    return *this;
 }
 
 HttpResponse &HttpResponse::setBody(string &_body)
 {
     this->_body = _body;
+    return *this;
 }
 string HttpResponse::getHeaderStr()
 {
@@ -438,7 +442,7 @@ string HttpResponse::getHeaderStr()
     for (auto item : _res_headers) {
         res.append(item.first + ":" + item.second + CRLF);
     }
-    res.append(CRLFCRLF);
+    res.append(CRLF);
     return res;
 }
 string HttpResponse::getResponseStr()

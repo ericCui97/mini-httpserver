@@ -17,3 +17,5 @@ route.cpp
  logger.h
  utils.h
  )
+
+configure_file(hello.html hello.html COPYONLY)

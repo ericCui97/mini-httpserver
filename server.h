@@ -11,32 +11,34 @@ class HttpServer
 {
 public:
     // itor
-    int GET(char *url_pattern, handler_t callback)
+    int GET(const char *url_pattern, handler_t callback)
     {
         no.addRoute(url_pattern, callback);
+        return 0;
     };
-    int HEAD(char *url_pattern, handler_t callback);
-    int STATIC(char *url_pattern, handler_t callback)
+    int HEAD(const char *url_pattern, handler_t callback);
+    int STATIC(const char *url_pattern, handler_t callback)
     {
         no.addRoute(url_pattern, callback);
+        return 0;
     };
-    void bind(char *ip)
+    void bind(const char *ip)
     {
-        strcpy(this->ip, ip);
+        this->ip = ip;
     }
     void listen(int port)
     {
         this->port = port;
     };
 
-    void Run()
+    int Run()
     {
-        mainloop(ip, port, no);
+        return mainloop(ip.c_str(), port, no);
     }
 
 private:
     node no;
-    char *ip;
+    std::string ip = "127.0.0.1";
     int port = 8888;
 };
 #endif

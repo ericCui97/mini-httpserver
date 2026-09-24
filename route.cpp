@@ -6,10 +6,10 @@ using namespace httprouter;
 
 node::node()
 	:node_(new tree_node_t{
-	  path:       "",
-	  indices:    "",
-	  children:   {},
-	  handle:     nullptr,
+	  "",
+	  "",
+	  {},
+	  nullptr,
 		})
 {
 }
@@ -37,10 +37,10 @@ void node::addRoute(std::string path, handler_t handle) {
 			// Split edge
 			if (i < node->path.size()) {
 				auto child = std::shared_ptr<tree_node_t>(new tree_node_t{
-				  path :      std::string(node->path.c_str() + i),
-				  indices :   node->indices,
-				  children :  std::move(node->children),
-				  handle :    node->handle,
+				  std::string(node->path.c_str() + i),
+				  node->indices,
+				  std::move(node->children),
+				  node->handle,
 				});
 
 				node->children = std::vector<std::shared_ptr<tree_node_t>>{ child };
@@ -72,10 +72,10 @@ void node::addRoute(std::string path, handler_t handle) {
 				if (ch != ':' && ch != '*') {
 					node->indices += ch;
 					auto child = std::shared_ptr<tree_node_t>(new tree_node_t{
-					path :      "",
-					indices :   "",
-					children :  {},
-					handle :    nullptr,
+					"",
+					"",
+					{},
+					nullptr,
 					});
 					node->children.push_back(child);
 					node = child;
@@ -106,24 +106,15 @@ void node::insertChild(tree_node_t* node, std::string& path, handler_t handle) {
 
 
 handler_t node::handler(std::string path) {
-	auto node = node_;
-	while (true) {
-		if (path.size() > node->path.size()) {
-			if (std::string(path.c_str(), node->path.size()) == node->path) {
-				path = std::string(path.c_str() + node->path.size());
-			}
-
-			char ch = path[0];
-			for (std::size_t i = 0; i < node->indices.size(); i++) {
-				if (ch == node->indices[i]) {
-					node = node->children[i];
-					continue;
-				}
-			}
-		}
-		else if (path == node->path) {
-			return node->handle;
-		}
-	}
+    auto current = node_;
+    while (current) {
+        if (path.compare(0, current->path.size(), current->path) != 0)
+            return nullptr;
+        path.erase(0, current->path.size());
+        if (path.empty()) return current->handle;
+        auto index = current->indices.find(path[0]);
+        if (index == std::string::npos) return nullptr;
+        current = current->children[index];
+    }
+    return nullptr;
 }
-

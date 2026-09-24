@@ -54,16 +54,21 @@ inline static int setKeepALive(int _fd, int idle, int intv, int cnt)
         return -1;
     }
 
-    if (setsockopt(_fd, SOL_TCP, TCP_KEEPINTVL, &intv, sizeof intv) != 0) {
+    if (setsockopt(_fd, IPPROTO_TCP, TCP_KEEPINTVL, &intv, sizeof intv) != 0) {
         log_err("set keep alive error");
         return -1;
     }
 
-    if (setsockopt(_fd, SOL_TCP, TCP_KEEPIDLE, &idle, sizeof idle) != 0) {
+#ifdef __APPLE__
+    const int idle_option = TCP_KEEPALIVE;
+#else
+    const int idle_option = TCP_KEEPIDLE;
+#endif
+    if (setsockopt(_fd, IPPROTO_TCP, idle_option, &idle, sizeof idle) != 0) {
         log_err("set keep alive error");
         return -1;
     }
-    if (setsockopt(_fd, SOL_TCP, TCP_KEEPCNT, &cnt, sizeof cnt) != 0) {
+    if (setsockopt(_fd, IPPROTO_TCP, TCP_KEEPCNT, &cnt, sizeof cnt) != 0) {
         log_err("set keep alive error");
         return -1;
     }
